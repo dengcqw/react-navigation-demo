@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
+import BottomTabScreen from './BottomTabScreen'
 
 function HomeScreen() {
   const navigation = useNavigation()
@@ -35,6 +36,20 @@ function DetailsScreen({ route }) {
 
     return unsubscribe;
   }, [navigation]);
+
+  // or useIsFocused
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      console.log('ProfileScreen focus effect');
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+        console.log('ProfileScreen focus effect cleanup');
+      };
+    }, [])
+  );
 
   React.useEffect(() => {
     if (itemId === 0) {

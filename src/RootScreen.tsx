@@ -1,15 +1,25 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { NavigationContainer, useNavigation, useFocusEffect } from '@react-navigation/native';
+import { View, Text, Pressable, StatusBar } from 'react-native';
+import { NavigationContainer, useNavigation, useFocusEffect, isFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
 import BottomTabScreen from './BottomTabScreen'
 
+import { useIsFocused } from '@react-navigation/native';
+
+// render it only when the screen is focused
+function FocusAwareStatusBar(props) {
+  const isFocused = useIsFocused();
+
+  return isFocused ? <StatusBar {...props} /> : null;
+}
+
 function HomeScreen() {
   const navigation = useNavigation()
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
       <Text onPress={() => navigation.navigate('Details')} >Home Screen</Text>
       <View style={{ height: 20 }} />
       <Text onPress={() => navigation.navigate('BottomTab')} >Bottom Tab</Text>
@@ -66,6 +76,7 @@ function DetailsScreen({ route }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Text onPress={() => {
         navigation.push('Details', { itemId: 86 })
       }}>

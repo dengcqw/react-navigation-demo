@@ -79,6 +79,7 @@ type RootStackParamList = {
   MyTask: undefined
   Home: undefined
   Detail: { itemId: number }
+  BottomTab: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -102,6 +103,7 @@ function RootStack() {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+      <Stack.Screen name="BottomTab" component={BottomTabScreen} options={{ title: 'BottomTab' }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Details' }} initialParams={{ itemId: 0 }} />
       <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task', animation: 'slide_from_bottom' }} />
     </Stack.Navigator>

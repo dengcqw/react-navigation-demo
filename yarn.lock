@@ -1571,6 +1571,15 @@
   dependencies:
     color "^4.2.3"
 
+"@react-navigation/material-top-tabs@^7.0.0-rc.17":
+  version "7.0.0-rc.17"
+  resolved "https://registry.npmjs.org/@react-navigation/material-top-tabs/-/material-top-tabs-7.0.0-rc.17.tgz"
+  integrity sha512-oqwQ5rmjwJJ38rM6IvTGkwIJdP4n2xleliX6J29/uIYUW4yvEpJP+3fyWPEAPjb8UmsOscSRY8eETt8l3ZBVZg==
+  dependencies:
+    "@react-navigation/elements" "^2.0.0-rc.16"
+    color "^4.2.3"
+    react-native-tab-view "^4.0.0-rc.7"
+
 "@react-navigation/native-stack@^7.0.0-rc.18":
   version "7.0.0-rc.18"
   resolved "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-7.0.0-rc.18.tgz"
@@ -4639,7 +4648,7 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-pager-view@*, react-native-pager-view@^6.3.3:
+react-native-pager-view@*, react-native-pager-view@^6.3.3, "react-native-pager-view@>= 6.0.0":
   version "6.3.3"
   resolved "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.3.3.tgz"
   integrity sha512-HViKBlfN/kBJUSu5mRL/V9Bkf1j7uDZozGAjbzh4o9XYo11qVcIK7IwvfzqrkNerVSDy/cAmZcXbcyWnII8xMA==
@@ -4663,6 +4672,13 @@ react-native-tab-view@^3.5.2:
   integrity sha512-nE5WqjbeEPsWQx4mtz81QGVvgHRhujTNIIZiMCx3Bj6CBFDafbk7XZp9ocmtzXUQaZ4bhtVS43R4FIiR4LboJw==
   dependencies:
     use-latest-callback "^0.1.5"
+
+react-native-tab-view@^4.0.0-rc.7:
+  version "4.0.0-rc.7"
+  resolved "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-4.0.0-rc.7.tgz"
+  integrity sha512-ZPu0hAGy0T5nxfg/IU6rGEJBwLfvubeJAW8yY6eZzxlU0s/lDP5IKgabYBPpiy1EFjyiFDXM83Wr2vMt4mJ7Ag==
+  dependencies:
+    use-latest-callback "^0.2.1"
 
 react-native@*, "react-native@>= 0.72.0", react-native@0.74.3:
   version "0.74.3"

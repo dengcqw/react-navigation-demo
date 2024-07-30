@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
 
 
 function HomeScreen() {
+  const navigation = useNavigation()
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text onPress={() => navigation.navigate('MyTask') } >Home Screen</Text>
     </View>
   );
 }

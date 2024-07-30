@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -17,11 +17,17 @@ function HomeScreen() {
 function DetailsScreen({ route }) {
   const navigation = useNavigation()
   const { itemId } = route.params ?? {}
+  const [count, setCount] = React.useState(0);
   console.log('---->params', route.params)
 
   React.useEffect(() => {
     if (itemId === 0) {
       navigation.setParams({itemId: 100})
+      navigation.setOptions({
+      headerRight: () => (
+        <Text onPress={() => setCount((c) => c + 1)}>Update count</Text>
+      ),
+    });
     }
   }, [itemId, navigation])
 

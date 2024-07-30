@@ -9,6 +9,7 @@ import BottomTabScreen from './BottomTabScreen'
 import { Button } from '@react-navigation/elements';
 
 import { EditTextScreen } from './EditScreen'
+import { navigationRef } from './RootNavigation'
 
 // render it only when the screen is focused
 function FocusAwareStatusBar(props) {
@@ -165,7 +166,7 @@ function RootStack() {
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootStack />
     </NavigationContainer>
   );

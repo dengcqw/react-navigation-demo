@@ -7,6 +7,7 @@ import { TabScreen } from './TopTabScreen';
 import BottomTabScreen from './BottomTabScreen'
 
 import { useIsFocused } from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
 
 // render it only when the screen is focused
 function FocusAwareStatusBar(props) {
@@ -23,6 +24,7 @@ function HomeScreen() {
       <Text onPress={() => navigation.navigate('Details')} >Home Screen</Text>
       <View style={{ height: 20 }} />
       <Text onPress={() => navigation.navigate('BottomTab')} >Bottom Tab</Text>
+      <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
     </View>
   );
 }
@@ -88,6 +90,18 @@ function DetailsScreen({ route }) {
   );
 }
 
+function ModalScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#000000AA' }}>
+      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+      <Button onPress={() => navigation.goBack()}>Dismiss</Button>
+    </View>
+  );
+}
+
+
 type RootStackParamList = {
   MyTask: undefined
   Home: undefined
@@ -119,6 +133,9 @@ function RootStack() {
       <Stack.Screen name="BottomTab" component={BottomTabScreen} options={{ title: 'BottomTab' }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Details' }} initialParams={{ itemId: 0 }} />
       <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task', animation: 'slide_from_bottom' }} />
+      <Stack.Group screenOptions={{ presentation: 'transparentModal' }}>
+        <Stack.Screen name="MyModal" component={ModalScreen} options={{headerShown: false}} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -154,3 +171,7 @@ export default function App() {
 //  screen: 'Settings',
 //  params: { user: 'jane' },
 // })
+//
+// Modal screen
+// 只定义在最顶层stack
+// Modal 上不能push 一般页面，只能push Modal

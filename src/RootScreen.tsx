@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, Text, Pressable, StatusBar } from 'react-native';
-import { NavigationContainer, useNavigation, useFocusEffect, isFocused } from '@react-navigation/native';
+import { View, Text, Pressable, StatusBar, BackHandler } from 'react-native';
+import { NavigationContainer, useNavigation, useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
 import BottomTabScreen from './BottomTabScreen'
 
-import { useIsFocused } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
+
+import { EditTextScreen } from './EditScreen'
 
 // render it only when the screen is focused
 function FocusAwareStatusBar(props) {
@@ -24,6 +25,9 @@ function HomeScreen() {
       <Text onPress={() => navigation.navigate('Details')} >Home Screen</Text>
       <View style={{ height: 20 }} />
       <Text onPress={() => navigation.navigate('BottomTab')} >Bottom Tab</Text>
+      <View style={{ height: 20 }} />
+      <Text onPress={() => navigation.navigate('Edit')} >Edit</Text>
+      <View style={{ height: 20 }} />
       <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
     </View>
   );
@@ -124,6 +128,7 @@ type RootStackParamList = {
   Home: undefined
   Detail: { itemId: number }
   BottomTab: undefined
+  Edit: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -147,6 +152,7 @@ function RootStack() {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+      <Stack.Screen name="Edit" component={EditTextScreen} options={{ title: 'Edit' }} />
       <Stack.Screen name="BottomTab" component={BottomTabScreen} options={{ title: 'BottomTab' }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Details' }} initialParams={{ itemId: 0 }} />
       <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task', animation: 'slide_from_bottom' }} />

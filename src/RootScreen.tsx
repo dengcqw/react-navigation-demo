@@ -11,6 +11,8 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text onPress={() => navigation.navigate('Details')} >Home Screen</Text>
+      <View style={{ height: 20 }} />
+      <Text onPress={() => navigation.navigate('BottomTab')} >Bottom Tab</Text>
     </View>
   );
 }

@@ -17,7 +17,7 @@ function HomeScreen() {
 function DetailsScreen({ route }) {
   const navigation = useNavigation()
   const { itemId } = route.params ?? {}
-  console.log('---->itemId', itemId)
+  console.log('---->params', route.params)
 
   React.useEffect(() => {
     if (itemId === 0) {
@@ -33,7 +33,7 @@ function DetailsScreen({ route }) {
         Go to Details... again
       </Text>
       <View style={{ height: 20 }} />
-      <Text onPress={() => navigation.goBack()}>Go back</Text>
+      <Text onPress={() => navigation.popTo('Details', { popitemId: 0 })}>Go back</Text>
     </View>
   );
 }
@@ -82,3 +82,13 @@ export default function App() {
 // read params from route
 // initialParams
 // navigation.setParams
+//
+// 回传参数，避免使用相同参数名导致参数覆盖
+// navigation.popTo
+//
+// 嵌套导航传参，如嵌套了TabBar
+// https://reactnavigation.org/docs/7.x/nesting-navigators
+// navigation.navigate('More', {
+//  screen: 'Settings',
+//  params: { user: 'jane' },
+// })

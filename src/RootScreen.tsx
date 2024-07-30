@@ -10,7 +10,21 @@ function HomeScreen() {
   const navigation = useNavigation()
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text onPress={() => navigation.navigate('MyTask') } >Home Screen</Text>
+      <Text onPress={() => navigation.navigate('Details') } >Home Screen</Text>
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text onPress={() => navigation.push('Details')}>
+        Go to Details... again
+      </Text>
+      <View style={{height: 20}}/>
+      <Text onPress={() => navigation.goBack()}>Go back</Text>
     </View>
   );
 }
@@ -18,6 +32,7 @@ function HomeScreen() {
 type RootStackParamList = {
   MyTask: undefined
   Home: undefined
+  Detail: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -31,7 +46,8 @@ function RootStack() {
     initialRouteName={'Home'}
     >
       <Stack.Screen name="Home" component={HomeScreen} options={{title: 'Home'}} />
-      <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task' }} />
+      <Stack.Screen name="Details" component={DetailsScreen} options={{title: 'Details'}} />
+      <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task', animation: 'slide_from_bottom' }} />
     </Stack.Navigator>
   );
 }

@@ -1,6 +1,7 @@
 package com.awesomeproject
 
 import android.app.Application
+import android.preference.PreferenceManager
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -29,6 +30,7 @@ class MainApplication : Application(), ReactApplication {
         override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED
       }
 
+    // new arch
   override val reactHost: ReactHost
     get() = getDefaultReactHost(applicationContext, reactNativeHost)
 
@@ -39,5 +41,11 @@ class MainApplication : Application(), ReactApplication {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
     }
+
+      if (BuildConfig.DEBUG) {
+          val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+          val editor = preferences.edit()
+          editor.putString("debug_http_host", "10.66.106.215:8081").apply();
+      }
   }
 }

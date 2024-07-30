@@ -21,13 +21,29 @@ function DetailsScreen({ route }) {
   console.log('---->params', route.params)
 
   React.useEffect(() => {
-    if (itemId === 0) {
-      navigation.setParams({itemId: 100})
-      navigation.setOptions({
-      headerRight: () => (
-        <Text onPress={() => setCount((c) => c + 1)}>Update count</Text>
-      ),
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log('ProfileScreen focused');
     });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      console.log('ProfileScreen blurred');
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  React.useEffect(() => {
+    if (itemId === 0) {
+      navigation.setParams({ itemId: 100 })
+      navigation.setOptions({
+        headerRight: () => (
+          <Text onPress={() => setCount((c) => c + 1)}>Update count</Text>
+        ),
+      });
     }
   }, [itemId, navigation])
 

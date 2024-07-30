@@ -35,6 +35,23 @@ function DetailsScreen({ route }) {
   const [count, setCount] = React.useState(0);
   console.log('---->params', route.params)
 
+  // 自定义android返回处理
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        // return true; 已处理
+        return false;
+      };
+
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      );
+
+      return () => subscription.remove();
+    }, [])
+  );
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('ProfileScreen focused');

@@ -172,6 +172,11 @@ export default function App() {
   );
 }
 
+// 配置 reanimated
+// https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#installation
+// 需要手动安装，不然rn无法发现这个模块
+// 修改后需要清缓存运行： npm start -- --reset-cache
+//
 // first, we need to wrap your app in NavigationContainer
 // NavigationContainer is a component that manages our navigation tree and contains the navigation state.
 // createNativeStackNavigator is a function that returns an object containing 2 properties: Screen and Navigator

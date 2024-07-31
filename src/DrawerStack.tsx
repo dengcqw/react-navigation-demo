@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { View, Linking } from 'react-native';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 import { Drawer } from 'react-native-drawer-layout';
@@ -34,6 +34,17 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
+      <DrawerItem
+        label="Help"
+        onPress={() => Linking.openURL('https://www.google.com')}
+      />
+      <DrawerItem
+        label="Close"
+        onPress={() => props.navigation.closeDrawer()}
+      />
+      <Button onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}>
+        Close drawer
+      </Button>
     </DrawerContentScrollView>
   );
 }

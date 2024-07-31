@@ -13,6 +13,7 @@ function HomeScreen() {
       <Button onPress={() => navigation.navigate('Notifications')}>
         Go to notifications
       </Button>
+      <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
     </View>
   );
 }

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { View, Linking } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 import { Drawer } from 'react-native-drawer-layout';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 function HomeScreen() {
   const navigation = useNavigation();
+  const rightDrawerAction = React.useContext(RightDrawerContext)
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -14,6 +16,7 @@ function HomeScreen() {
         Go to notifications
       </Button>
       <Button onPress={() => navigation.openDrawer()}>Open drawer</Button>
+      <Button onPress={() => rightDrawerAction.openRightDrawer()}>Open Right drawer</Button>
     </View>
   );
 }
@@ -60,6 +63,17 @@ export function LeftDrawerScreen() {
   );
 }
 
+
+function RightCustomDrawerContent(props) {
+  return (
+    <SafeAreaView>
+    <Button onPress={() => props.actions.closeRightDrawer()}>
+      Close drawer
+    </Button>
+    </SafeAreaView>
+  );
+}
+
 const RightDrawerContext = React.createContext();
 // 两个Drawer 推荐下面方式
 export function RightDrawerScreen() {
@@ -75,16 +89,18 @@ export function RightDrawerScreen() {
   );
 
   return (
-    <Drawer
-      open={rightDrawerOpen}
-      onOpen={() => setRightDrawerOpen(true)}
-      onClose={() => setRightDrawerOpen(false)}
-      drawerPosition="right"
-      renderDrawerContent={() => <>{/* Right drawer content */}</>}
-    >
-      <RightDrawerContext.Provider value={value}>
-        <LeftDrawerScreen />
-      </RightDrawerContext.Provider>
-    </Drawer>
+    <SafeAreaProvider>
+      <Drawer
+        open={rightDrawerOpen}
+        onOpen={() => setRightDrawerOpen(true)}
+        onClose={() => setRightDrawerOpen(false)}
+        drawerPosition="right"
+        renderDrawerContent={() => <RightCustomDrawerContent actions={value} />}
+      >
+        <RightDrawerContext.Provider value={value}>
+          <LeftDrawerScreen />
+        </RightDrawerContext.Provider>
+      </Drawer>
+    </SafeAreaProvider>
   );
 }

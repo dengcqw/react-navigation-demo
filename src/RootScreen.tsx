@@ -107,3 +107,10 @@ export default function App() {
 // Modal screen
 // 只定义在最顶层stack
 // Modal 上不能push 一般页面，只能push Modal
+//
+// 可以在原生项目中添加schema的工具, 下面添加了mychat做为schema
+// npx uri-scheme add mychat --android
+// 测试命令
+// npx uri-scheme open "mychat://chat/jane" --ios
+// xcrun simctl openurl booted "mychat://chat/jane"
+// adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp

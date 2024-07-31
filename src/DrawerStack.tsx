@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 import { Drawer } from 'react-native-drawer-layout';
@@ -30,9 +30,19 @@ function NotificationsScreen() {
 
 const DrawerNavi = createDrawerNavigator();
 
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+
 export function LeftDrawerScreen() {
   return (
-    <DrawerNavi.Navigator initialRouteName="Home">
+    <DrawerNavi.Navigator
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      initialRouteName="Home">
       <DrawerNavi.Screen name="Home" component={HomeScreen} />
       <DrawerNavi.Screen name="Notifications" component={NotificationsScreen} />
     </DrawerNavi.Navigator>

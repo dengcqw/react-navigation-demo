@@ -1,116 +1,20 @@
 import React from 'react';
-import { View, Text, Pressable, StatusBar, BackHandler } from 'react-native';
+import { View, Text, Pressable, StatusBar } from 'react-native';
+
+import { Button } from '@react-navigation/elements';
 import { NavigationContainer, useNavigation, useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
 import BottomTabScreen from './BottomTabScreen'
-
-import { Button } from '@react-navigation/elements';
-
+import { LeftDrawerScreen, RightDrawerScreen} from './DrawerStack'
 import { EditTextScreen } from './EditScreen'
+import {HomeScreen} from './HomeScreen'
+import {DetailsScreen} from './DetailScreen'
+
 import { navigationRef } from './RootNavigation'
 
-// render it only when the screen is focused
-function FocusAwareStatusBar(props) {
-  const isFocused = useIsFocused();
-
-  return isFocused ? <StatusBar {...props} /> : null;
-}
-
-function HomeScreen() {
-  const navigation = useNavigation()
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-      <Text onPress={() => navigation.navigate('Details')} >Home Screen</Text>
-      <View style={{ height: 20 }} />
-      <Text onPress={() => navigation.navigate('BottomTab')} >Bottom Tab</Text>
-      <View style={{ height: 20 }} />
-      <Text onPress={() => navigation.navigate('Edit')} >Edit</Text>
-      <View style={{ height: 20 }} />
-      <Button onPress={() => navigation.navigate('MyModal')}>Open Modal</Button>
-    </View>
-  );
-}
-
-function DetailsScreen({ route }) {
-  const navigation = useNavigation()
-  const { itemId } = route.params ?? {}
-  const [count, setCount] = React.useState(0);
-  console.log('---->params', route.params)
-
-  // 自定义android返回处理
-  useFocusEffect(
-    React.useCallback(() => {
-      const onBackPress = () => {
-        // return true; 已处理
-        return false;
-      };
-
-      const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        onBackPress
-      );
-
-      return () => subscription.remove();
-    }, [])
-  );
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      console.log('ProfileScreen focused');
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
-      console.log('ProfileScreen blurred');
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  // or useIsFocused
-  useFocusEffect(
-    React.useCallback(() => {
-      // Do something when the screen is focused
-      console.log('ProfileScreen focus effect');
-
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-        console.log('ProfileScreen focus effect cleanup');
-      };
-    }, [])
-  );
-
-  React.useEffect(() => {
-    if (itemId === 0) {
-      navigation.setParams({ itemId: 100 })
-      navigation.setOptions({
-        headerRight: () => (
-          <Text onPress={() => setCount((c) => c + 1)}>Update count</Text>
-        ),
-      });
-    }
-  }, [itemId, navigation])
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
-      <Text onPress={() => {
-        navigation.push('Details', { itemId: 86 })
-      }}>
-        Go to Details... again
-      </Text>
-      <View style={{ height: 20 }} />
-      <Text onPress={() => navigation.popTo('Details', { popitemId: 0 })}>Go back</Text>
-    </View>
-  );
-}
+import Animated from 'react-native-reanimated';
 
 function ModalScreen() {
   const navigation = useNavigation();
@@ -122,7 +26,6 @@ function ModalScreen() {
     </View>
   );
 }
-
 
 type RootStackParamList = {
   MyTask: undefined

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Linking } from 'react-native';
+import { View, Linking, Pressable } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 import { Drawer } from 'react-native-drawer-layout';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -52,9 +53,24 @@ function CustomDrawerContent(props) {
   );
 }
 
+function RightDrawerIcon() {
+  const rightDrawerAction = React.useContext(RightDrawerContext)
+
+  return (
+    <Pressable onPress={rightDrawerAction.openRightDrawer}>
+    <Ionicons name={'cellular'} size={20} color={'red'} />
+    </Pressable>
+  )
+
+
+}
+
 export function LeftDrawerScreen() {
   return (
     <DrawerNavi.Navigator
+      screenOptions={{
+        headerRight: () => <RightDrawerIcon/>
+      }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       initialRouteName="Home">
       <DrawerNavi.Screen name="Home" component={HomeScreen} />
@@ -67,9 +83,9 @@ export function LeftDrawerScreen() {
 function RightCustomDrawerContent(props) {
   return (
     <SafeAreaView>
-    <Button onPress={() => props.actions.closeRightDrawer()}>
-      Close drawer
-    </Button>
+      <Button onPress={() => props.actions.closeRightDrawer()}>
+        Close drawer
+      </Button>
     </SafeAreaView>
   );
 }
@@ -98,6 +114,7 @@ export function RightDrawerScreen() {
         renderDrawerContent={() => <RightCustomDrawerContent actions={value} />}
       >
         <RightDrawerContext.Provider value={value}>
+          {/* LeftDrawerScreen 可以替换成任何页面 */}
           <LeftDrawerScreen />
         </RightDrawerContext.Provider>
       </Drawer>

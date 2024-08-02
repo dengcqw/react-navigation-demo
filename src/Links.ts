@@ -10,13 +10,13 @@ Linking.addEventListener('url', ({ url }) => {
 // 定义页面路由
 // config的嵌套要和导航器一直
 // 设置 NotFound 为 404页面
-export const linking = (): LinkingOptions => {
+// 输入命令验证 npx uri-scheme open "pagerouter://customtab/settings" --ios
+export const linking = ((): LinkingOptions => {
   return {
     prefixes: [
       'pagerouter://',
-      'http://127.0.0.1'
+      'http://127.0.0.1' // deeplink
     ],
-    filter: (url) => !url.startWiths('pagerouter'),
     config: {
       screens: {
         NotFound: '*',
@@ -35,8 +35,8 @@ export const linking = (): LinkingOptions => {
             Settings: 'settings'
           }
         },
-        Edit: 'Edit'
+        Edit: 'edit'
       }
     }
   }
-}
+})()

@@ -15,7 +15,7 @@ import {DetailsScreen} from './DetailScreen'
 import { navigationRef } from './RootNavigation'
 
 import Animated from 'react-native-reanimated';
-import './Links'
+import { linking } from './Links'
 import { NotFoundScreen } from './NotFoundScreen'
 
 function ModalScreen() {
@@ -72,7 +72,10 @@ function RootStack() {
 
 export default function App() {
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer
+      linking={linking}
+      ref={navigationRef}
+      >
       <RootStack />
     </NavigationContainer>
   );

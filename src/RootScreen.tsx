@@ -15,6 +15,7 @@ import {DetailsScreen} from './DetailScreen'
 import { navigationRef } from './RootNavigation'
 
 import Animated from 'react-native-reanimated';
+import './Links'
 
 function ModalScreen() {
   const navigation = useNavigation();

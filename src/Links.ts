@@ -9,6 +9,7 @@ Linking.addEventListener('url', ({ url }) => {
 // 参考 https://reactnavigation.org/docs/configuring-links
 // 定义页面路由
 // config的嵌套要和导航器一直
+// 设置 NotFound 为 404页面
 export const linking = (): LinkingOptions => {
   return {
     prefixes: [
@@ -18,6 +19,7 @@ export const linking = (): LinkingOptions => {
     filter: (url) => !url.startWiths('pagerouter'),
     config: {
       screens: {
+        NotFound: '*',
         MyTask: {
           screens: {
             Home: 'mytask/home',

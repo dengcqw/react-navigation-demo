@@ -16,6 +16,7 @@ import { navigationRef } from './RootNavigation'
 
 import Animated from 'react-native-reanimated';
 import './Links'
+import { NotFoundScreen } from './NotFoundScreen'
 
 function ModalScreen() {
   const navigation = useNavigation();
@@ -59,6 +60,7 @@ function RootStack() {
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
       <Stack.Screen name="Edit" component={EditTextScreen} options={{ title: 'Edit' }} />
       <Stack.Screen name="BottomTab" component={BottomTabScreen} options={{ title: 'BottomTab' }} />
+      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: '404' }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Details' }} initialParams={{ itemId: 0 }} />
       <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task', animation: 'slide_from_bottom' }} />
       <Stack.Group screenOptions={{ presentation: 'transparentModal' }}>

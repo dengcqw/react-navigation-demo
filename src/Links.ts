@@ -29,9 +29,10 @@ export const linking = (): LinkingOptions => {
         Home: 'home',
         Detail: 'detail',
         BottomTab: {
+          path: 'customtab',
           screens: {
-            Home: 'bottomtab/home',
-            Settings: 'bottomtab/settings'
+            Home: 'home',
+            Settings: 'settings'
           }
         },
         Edit: 'Edit'

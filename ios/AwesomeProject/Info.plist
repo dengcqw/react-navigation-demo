@@ -59,6 +59,12 @@
 					<string>mychat</string>
 				</array>
 			</dict>
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>pagerouter</string>
+				</array>
+			</dict>
 		</array>
 	</dict>
 </plist>

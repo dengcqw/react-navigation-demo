@@ -115,3 +115,7 @@ export default function App() {
 // npx uri-scheme open "mychat://chat/jane" --ios
 // xcrun simctl openurl booted "mychat://chat/jane"
 // adb shell am start -W -a android.intent.action.VIEW -d "mychat://chat/jane" com.simpleapp
+//
+// navigate 如果用于跳转到已经打开的页面会改变页面参数, 要使用版本7 中的popTo方法
+// 或成route中获取params
+// this.navigator.navigate(route.name, route.params)

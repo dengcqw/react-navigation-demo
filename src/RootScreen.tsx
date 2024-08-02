@@ -7,10 +7,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
 import BottomTabScreen from './BottomTabScreen'
-import { LeftDrawerScreen, RightDrawerScreen} from './DrawerStack'
+import { LeftDrawerScreen, RightDrawerScreen } from './DrawerStack'
 import { EditTextScreen } from './EditScreen'
-import {HomeScreen} from './HomeScreen'
-import {DetailsScreen} from './DetailScreen'
+import { HomeScreen } from './HomeScreen'
+import { DetailsScreen } from './DetailScreen'
 
 import { navigationRef } from './RootNavigation'
 
@@ -64,18 +64,38 @@ function RootStack() {
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Details' }} initialParams={{ itemId: 0 }} />
       <Stack.Screen name="MyTask" component={TabScreen} options={{ title: 'app_task', animation: 'slide_from_bottom' }} />
       <Stack.Group screenOptions={{ presentation: 'transparentModal' }}>
-        <Stack.Screen name="MyModal" component={ModalScreen} options={{headerShown: false}} />
+        <Stack.Screen name="MyModal" component={ModalScreen} options={{ headerShown: false }} />
       </Stack.Group>
     </Stack.Navigator>
   );
 }
 
+const trackScreenView = (name: string) => {
+  console.log('---->open screen', name)
+};
+
 export default function App() {
+  const routeNameRef = React.useRef();
   return (
     <NavigationContainer
       linking={linking}
       ref={navigationRef}
-      >
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+        if (previousRouteName !== currentRouteName) {
+          // Replace the line below to add the tracker from a mobile analytics SDK
+          await trackScreenView(currentRouteName);
+        }
+
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
+      }}
+    >
       <RootStack />
     </NavigationContainer>
   );

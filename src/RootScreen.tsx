@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, StatusBar } from 'react-native';
 
 import { Button } from '@react-navigation/elements';
-import { NavigationContainer, useNavigation, useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { NavigationContainer, useNavigation, useFocusEffect, useIsFocused, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabScreen } from './TopTabScreen';
@@ -74,10 +74,20 @@ const trackScreenView = (name: string) => {
   console.log('---->open screen', name)
 };
 
+// 配置页面背景色
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'rgb(140, 201, 125)'
+  },
+};
+
 export default function App() {
   const routeNameRef = React.useRef();
   return (
     <NavigationContainer
+      theme={MyTheme}
       linking={linking}
       ref={navigationRef}
       onReady={() => {
@@ -143,4 +153,5 @@ export default function App() {
 //
 // navigate 如果用于跳转到已经打开的页面会改变页面参数, 要使用版本7 中的popTo方法
 // 或成route中获取params
+// this.navigator.navigate(route.name, route.params)
 // this.navigator.navigate(route.name, route.params)

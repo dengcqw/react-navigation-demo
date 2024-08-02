@@ -77,3 +77,4 @@ Podfile.lock
 ios/AwesomeProject.xcodeproj/project.xcworkspace
 ios/AwesomeProject.xcworkspace
 yarn.lock
+web/dist

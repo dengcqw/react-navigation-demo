@@ -18,6 +18,13 @@ import Animated from 'react-native-reanimated';
 import { linking } from './Links'
 import { NotFoundScreen } from './NotFoundScreen'
 import type { RootStackParamList } from './RootStackParamList'
+import type { StackNavigationOptions, StackOptionsArgs } from '@react-navigation/stack'
+
+//const options = ({ route }: StackOptionsArgs): StackNavigationOptions => {
+  //return {
+    //headerTitle: route.name,
+  //};
+//};
 
 function ModalScreen() {
   const navigation = useNavigation();

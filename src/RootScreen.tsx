@@ -17,6 +17,7 @@ import { navigationRef } from './RootNavigation'
 import Animated from 'react-native-reanimated';
 import { linking } from './Links'
 import { NotFoundScreen } from './NotFoundScreen'
+import type { RootStackParamList } from './RootStackParamList'
 
 function ModalScreen() {
   const navigation = useNavigation();
@@ -28,14 +29,6 @@ function ModalScreen() {
     </View>
   );
 }
-
-type RootStackParamList = {
-  MyTask: undefined
-  Home: undefined
-  Detail: { itemId: number }
-  BottomTab: undefined
-  Edit: undefined
-};
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

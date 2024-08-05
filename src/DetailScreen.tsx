@@ -6,8 +6,14 @@ import { Button } from '@react-navigation/elements';
 import Animated from 'react-native-reanimated';
 import {FocusAwareStatusBar} from './components/FocusAwareStatusBar'
 
-export function DetailsScreen({ route }) {
-  const navigation = useNavigation()
+import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+// 参数定义在这个文件里
+import type { RootStackParamList } from './RootStackParamList'
+
+// 定义导航传参
+type Props = NativeStackScreenProps<RootStackParamList, 'Detail'>
+
+export function DetailsScreen({ route, navigation }: Props) {
   const { itemId } = route.params ?? {}
   const [count, setCount] = React.useState(0);
   console.log('---->params', route.params)

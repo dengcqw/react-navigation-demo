@@ -7,6 +7,7 @@ const appDirectory = path.resolve(__dirname, '../');
 
 const babelConfig = require('../babel.config');
 
+// 修改了配置文件，出现RN和web混合的错误信息，可以试试 npx react-native start --reset-cache
 // Babel loader configuration
 const babelLoaderConfiguration = {
   test: /\.(tsx|jsx|ts|js)?$/,
@@ -28,7 +29,15 @@ const babelLoaderConfiguration = {
       cacheDirectory: true,
       // Presets and plugins imported from main babel.config.js in root dir
       presets: babelConfig.presets,
-      plugins: ['react-native-web', ...(babelConfig.plugins || [])],
+      plugins: [
+        'react-native-web',
+        ...(babelConfig.plugins || []),
+        ["module-resolver", {
+          "alias": {
+            "^react-native$": "react-native-web"
+          }
+        }]
+      ],
     },
   },
 };
@@ -100,7 +109,7 @@ module.exports = argv => {
       // Defines __DEV__ and process.env as not being null
       new webpack.DefinePlugin({
         __DEV__: argv.mode !== 'production' || true,
-        process: {env: {}},
+        process: { env: {} },
       }),
     ],
     optimization: {
